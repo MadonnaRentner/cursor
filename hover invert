@@ -1,0 +1,51 @@
+<style>
+  @media (hover: none) {
+    .cursor {display:none !important;
+    }
+  }
+  * {
+    cursor: none;
+  }
+  .cursor {
+    --size: 10px;
+    height: var(--size);
+    width:  var(--size);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 99999999999;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .cursor.cursor-dot {
+    background: #ffffff;  /* This defines the color of the cursor */
+    mix-blend-mode: difference;  /* Delete this line if you dont want the circle to invert */
+    transition: width .6s, height .6s,
+      background-color .6s;
+    transition-timing-function: ease-out;
+  }
+  .cursor-dot.active {
+    --size: 50px;
+    background-color: #ffffff;
+  }
+</style>
+
+<script>
+  $(window).mousemove(function(e) {     
+    $(".cursor").css({
+      left: e.pageX,
+      top: e.pageY
+    })    
+  });
+  $(window).mousemove(function(e) {
+    $("a")
+      .on("mouseenter", function() {   
+      $('.cursor').addClass("active")   
+    })  
+  });
+  $(window).mousemove(function(e) {
+    $("a")
+      .on("mouseleave", function() {    
+      $('.cursor').removeClass("active")    
+    })
+  });
+</script>
